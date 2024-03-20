@@ -1,3 +1,4 @@
+import { send } from "vite";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
@@ -28,4 +29,35 @@ const signup = async (req, res) => {
 }
 
 
-export default { signup };
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email: email })
+
+        if (!user) {
+            return res.status(400).send({
+                message: "Email Not Found"
+            })
+        }
+
+        const comparedPassword = await bcrypt.compare(password, user.password)
+
+        if (!comparedPassword) {
+            return res.status(401).send({
+                message: "Incorrect Password"
+            })
+        }
+
+        res.status(200).send({
+            message: "Logged In"
+        })
+    } catch (error) {
+        return res.status(500).send({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+
+export default { signup, login };
