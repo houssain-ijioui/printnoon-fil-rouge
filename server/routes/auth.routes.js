@@ -1,9 +1,10 @@
 import express from "express";
 const router = express.Router()
 import authControllers from "../controllers/auth.controller.js";
+import credentialsDuplicated from "../middlwares/credentials-duplicated.middlware.js";
 
 
-router.get('/signup', authControllers.signup);
+router.post('/signup', credentialsDuplicated, authControllers.signup);
 
 
 export default router;
