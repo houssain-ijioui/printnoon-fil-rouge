@@ -3,9 +3,18 @@ import sideImage from "@/assets/auth/auth 1.png"
 import { Link } from 'react-router-dom';
 import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
+import { useState } from 'react';
 
 
 const Signup = () => {
+
+  const [ fullName, setFulName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+
+
+  console.log(fullName, email, password);
+  
   return (
     <div className='h-full flex flex-col'>
       <AuthNavbar />
@@ -18,9 +27,9 @@ const Signup = () => {
             <Link to="/login"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>Se connecter</h4></Link>
           </div>
           <form className=''>
-            <InputField placeholderText={"Full Name"} type={"text"} />
-            <InputField placeholderText={"Email"} type={"email"} />
-            <InputField placeholderText={"Password"} type={"password"} />
+            <InputField value={fullName} setValue={setFulName} placeholderText={"Full Name"} type={"text"} />
+            <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />
+            <InputField value={password} setValue={setPassword} placeholderText={"Password"} type={"password"} />
             <AuthButton text={"Signup"} />
           </form>
         </div>
