@@ -1,7 +1,14 @@
+import User from "../models/user.model.js";
 
 
 const signup = async (req, res) => {
-    res.send('signup')
+    const user = new User({
+        fullName: "houssain"
+    })
+
+    user.save()
+
+    res.send(user)
 }
 
 
