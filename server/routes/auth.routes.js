@@ -6,6 +6,7 @@ import credentialsDuplicated from "../middlwares/credentials-duplicated.middlwar
 
 router.post('/signup', credentialsDuplicated, authControllers.signup);
 router.post('/login', authControllers.login);
+router.post('/logout', authControllers.logout)
 
 
 export default router;

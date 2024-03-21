@@ -1,27 +1,26 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import generateToken from "../utils/generateToken.js";
 
 
 const signup = async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { name, email, password } = req.body;
     try {
-        const hashedPassword = await bcrypt.hash(password, 10)
 
         const user = new User({
-            fullName,
+            name,
             email,
-            password: hashedPassword
+            password
         })
 
         await user.save()
 
-        return res.status(201).send({
+        return res.status(201).json({
             message: "User Created Successfully",
-            user
         })
     } catch (error) {
         console.log(error);
-        return res.status(500).send({
+        return res.status(500).json({
             message: "Oops somehing went wrong"
         })
     }
@@ -35,7 +34,7 @@ const login = async (req, res) => {
         const user = await User.findOne({ email: email })
 
         if (!user) {
-            return res.status(400).send({
+            return res.status(400).json({
                 message: "Email Not Found"
             })
         }
@@ -43,20 +42,36 @@ const login = async (req, res) => {
         const comparedPassword = await bcrypt.compare(password, user.password)
 
         if (!comparedPassword) {
-            return res.status(401).send({
+            return res.status(401).json({
                 message: "Incorrect Password"
             })
         }
 
-        res.status(200).send({
+        generateToken(res, user._id)
+
+        res.status(200).json({
             message: "Logged In"
         })
     } catch (error) {
-        return res.status(500).send({
+        return res.status(500).json({
             message: "Oops something went wrong"
         })
     }
 }
 
 
-export default { signup, login };
+const logout = async (req, res) => {
+    try {
+        res.cookie("jwt", "", {
+            httpOnly: true,
+            expires: new Date(0)
+        })
+        res.status(200).json({ message: "Logged Out" })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+export default { signup, login, logout };
