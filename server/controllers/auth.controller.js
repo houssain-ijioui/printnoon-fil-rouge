@@ -74,4 +74,18 @@ const logout = async (req, res) => {
     }
 }
 
-export default { signup, login, logout };
+
+const profile = async (req, res) => {
+    try {
+        console.log(req.user);
+        res.status(200).json({
+            message: "Profile"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+export default { signup, login, logout, profile };
