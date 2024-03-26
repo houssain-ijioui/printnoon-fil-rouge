@@ -12,7 +12,7 @@ const app = express();
 
 // express middlwares
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(cookieParser());
 
 

@@ -11,7 +11,7 @@ import {
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
-import store from './store.js';
+import store from './store/store.js';
 import { Provider } from 'react-redux'
 
 

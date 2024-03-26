@@ -1,15 +1,29 @@
 import AuthNavbar from '@/components/AuthNavbar';
 import sideImage from "@/assets/auth/auth 1.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../store/features/authSlice';
+import { login } from '@/store/features/authAction';
 
 
 const Signup = () => {
 
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { userInfo, loginLoading, loginResponseMessage } = useSelector((state) => state.auth);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    dispatch(login({ email, password }))
+  }
+
 
   return (
     <div className='h-full flex flex-col'>
@@ -22,10 +36,10 @@ const Signup = () => {
             <h4 className='font-semibold'>Déja inscris ?</h4>
             <Link to="/signup"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>Se connecter</h4></Link>
           </div>
-          <form className=''>
+          <form className='' onSubmit={handleSubmit}>
             <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />
             <InputField value={password} setValue={setPassword} placeholderText={"Password"} type={"password"} />
-            <AuthButton text={"Login"} />
+            <AuthButton text={loginLoading ? "Loading..." :"Login"} />
           </form>
         </div>
         <div className='bg-firstBlue py-4 pl-8'>
@@ -36,4 +50,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;
