@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "@/store/features/authSlice";
+import { logout } from "@/store/features/authAction";
+import { useEffect } from "react";
 
 
 const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const { loggedOut } = useSelector(state => state.auth)
+
   const handleLougout = () => {
     dispatch(logout())
   }
+
+  useEffect(() => {
+    if (loggedOut) {
+      navigate('/login')
+    }
+  }, [loggedOut])
+
 
   return (
     <>

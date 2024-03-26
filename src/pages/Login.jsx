@@ -16,7 +16,7 @@ const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { userInfo, loginLoading, loginResponseMessage } = useSelector((state) => state.auth);
+  const { userInfo, loginLoading, loginResponseMessage, loggedIn } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,10 +28,10 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    if (loginResponseMessage === "Logged In") {
+    if (loggedIn) {
       navigate('/')
     }
-  }, [loginResponseMessage, navigate])
+  }, [loggedIn, navigate])
 
 
   return (

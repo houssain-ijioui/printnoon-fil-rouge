@@ -5,6 +5,7 @@ import generateToken from "../utils/generateToken.js";
 
 const signup = async (req, res) => {
     const { name, email, password } = req.body;
+    console.log("triggered");
     try {
 
         const user = new User({
