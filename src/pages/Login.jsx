@@ -5,7 +5,6 @@ import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../store/features/authSlice';
 import { login } from '@/store/features/authAction';
 
 
@@ -21,8 +20,18 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(login({ email, password }))
+    try {
+      dispatch(login({ email, password }))
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  useEffect(() => {
+    if (loginResponseMessage === "Logged In") {
+      navigate('/')
+    }
+  }, [loginResponseMessage, navigate])
 
 
   return (
