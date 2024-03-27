@@ -7,7 +7,7 @@ const credentialsDuplicated = async (req, res, next) => {
         const userExists = await User.findOne({ email: email });
 
         if (userExists) {
-            return res.status(400).send({
+            return res.status(401).send({
                 message: "Failed! Email Already in use."
             })
         }

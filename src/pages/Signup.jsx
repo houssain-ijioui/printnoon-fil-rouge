@@ -3,17 +3,38 @@ import sideImage from "@/assets/auth/auth 1.png"
 import { Link } from 'react-router-dom';
 import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { signup } from '@/store/features/authAction';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { clearSignedUpResponseMessage } from '@/store/features/authSlice';
 
 
 const Signup = () => {
 
-  const [ fullName, setFulName ] = useState('');
+  const [ name, setName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
 
+  const { signUpLoading, signedUpResponseMessage } = useSelector((state) => state.auth)
 
-  console.log(fullName, email, password);
+  const dispatch  = useDispatch()
+
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    dispatch(signup({ name, email, password }))
+  }
+
+  useEffect(() => {
+    if (signedUpResponseMessage !== "") {
+      toast(signedUpResponseMessage, {
+        duration: 1900
+      })
+      dispatch(clearSignedUpResponseMessage())
+    }
+  }, [signedUpResponseMessage])
+
   
   return (
     <div className='h-full flex flex-col'>
@@ -26,11 +47,11 @@ const Signup = () => {
             <h4 className='font-semibold'>Déja inscris ?</h4>
             <Link to="/login"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>Se connecter</h4></Link>
           </div>
-          <form className=''>
-            <InputField value={fullName} setValue={setFulName} placeholderText={"Full Name"} type={"text"} />
+          <form className='' onSubmit={handleRegister}>
+            <InputField value={name} setValue={setName} placeholderText={"Full Name"} type={"text"} />
             <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />
             <InputField value={password} setValue={setPassword} placeholderText={"Password"} type={"password"} />
-            <AuthButton text={"Signup"} />
+            <AuthButton text={signUpLoading ? "Loading..." :"Signup"} />
           </form>
         </div>
         <div className='bg-firstBlue py-4 pl-8'>

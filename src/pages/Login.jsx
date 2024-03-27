@@ -1,15 +1,46 @@
 import AuthNavbar from '@/components/AuthNavbar';
 import sideImage from "@/assets/auth/auth 1.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '@/store/features/authAction';
+import toast from 'react-hot-toast';
+import { clearLoginResponseMessage } from '@/store/features/authSlice';
 
 
 const Signup = () => {
 
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { loginLoading, userInfo, loginResponseMessage } = useSelector((state) => state.auth);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      dispatch(login({ email, password }))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (userInfo !== null) {
+      navigate('/')
+    }
+    if (loginResponseMessage !== "") {
+      toast(loginResponseMessage, {
+        duration: 1900
+      })
+      dispatch(clearLoginResponseMessage())
+    }
+  }, [userInfo, navigate, loginResponseMessage])
+
 
   return (
     <div className='h-full flex flex-col'>
@@ -20,12 +51,12 @@ const Signup = () => {
           <h4 className='text-secondBlue font-semibold text-base mb-3'>Connectez-vous pour suiver vos conceptions et vos commandes, le tout en un seul endroit.</h4>
           <div className='flex flex-row mb-3'>
             <h4 className='font-semibold'>Déja inscris ?</h4>
-            <Link to="/signup"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>Se connecter</h4></Link>
+            <Link to="/signup"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>S'inscrire</h4></Link>
           </div>
-          <form className=''>
+          <form className='' onSubmit={handleSubmit}>
             <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />
             <InputField value={password} setValue={setPassword} placeholderText={"Password"} type={"password"} />
-            <AuthButton text={"Login"} />
+            <AuthButton text={loginLoading ? "Loading..." :"Login"} />
           </form>
         </div>
         <div className='bg-firstBlue py-4 pl-8'>
@@ -36,4 +67,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;

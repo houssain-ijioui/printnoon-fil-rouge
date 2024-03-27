@@ -5,6 +5,7 @@ import generateToken from "../utils/generateToken.js";
 
 const signup = async (req, res) => {
     const { name, email, password } = req.body;
+    console.log("triggered");
     try {
 
         const user = new User({
@@ -30,12 +31,13 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
 
+
     try {
         const user = await User.findOne({ email: email })
 
         if (!user) {
-            return res.status(400).json({
-                message: "Email Not Found"
+            return res.status(401).json({
+                message: "Email Or Password is not Valid"
             })
         }
 
@@ -43,14 +45,15 @@ const login = async (req, res) => {
 
         if (!comparedPassword) {
             return res.status(401).json({
-                message: "Incorrect Password"
+                message: "Email Or Password is not Valid"
             })
         }
 
         generateToken(res, user._id)
 
         res.status(200).json({
-            message: "Logged In"
+            message: "Logged In",
+            user
         })
     } catch (error) {
         return res.status(500).json({
