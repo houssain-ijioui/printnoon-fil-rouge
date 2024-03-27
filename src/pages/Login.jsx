@@ -6,6 +6,8 @@ import AuthButton from '@/components/ui/AuthButton';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/store/features/authAction';
+import toast from 'react-hot-toast';
+import { clearLoginResponseMessage } from '@/store/features/authSlice';
 
 
 const Signup = () => {
@@ -16,7 +18,7 @@ const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { userInfo, loginLoading, loginResponseMessage, loggedIn } = useSelector((state) => state.auth);
+  const { loginLoading, userInfo, loginResponseMessage } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,10 +30,16 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    if (loggedIn) {
+    if (userInfo !== null) {
       navigate('/')
     }
-  }, [loggedIn, navigate])
+    if (loginResponseMessage !== "") {
+      toast(loginResponseMessage, {
+        duration: 1900
+      })
+      dispatch(clearLoginResponseMessage())
+    }
+  }, [userInfo, navigate, loginResponseMessage])
 
 
   return (
@@ -43,7 +51,7 @@ const Signup = () => {
           <h4 className='text-secondBlue font-semibold text-base mb-3'>Connectez-vous pour suiver vos conceptions et vos commandes, le tout en un seul endroit.</h4>
           <div className='flex flex-row mb-3'>
             <h4 className='font-semibold'>Déja inscris ?</h4>
-            <Link to="/signup"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>Se connecter</h4></Link>
+            <Link to="/signup"><h4 className='text-thirdBlue font-semibold ml-4 hover:underline'>S'inscrire</h4></Link>
           </div>
           <form className='' onSubmit={handleSubmit}>
             <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />

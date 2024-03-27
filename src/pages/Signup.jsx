@@ -6,6 +6,8 @@ import AuthButton from '@/components/ui/AuthButton';
 import { useEffect, useState } from 'react';
 import { signup } from '@/store/features/authAction';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { clearSignedUpResponseMessage } from '@/store/features/authSlice';
 
 
 const Signup = () => {
@@ -25,7 +27,12 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    console.log(signedUpResponseMessage);
+    if (signedUpResponseMessage !== "") {
+      toast(signedUpResponseMessage, {
+        duration: 1900
+      })
+      dispatch(clearSignedUpResponseMessage())
+    }
   }, [signedUpResponseMessage])
 
   

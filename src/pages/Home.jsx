@@ -9,20 +9,21 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { loggedOut } = useSelector(state => state.auth)
+  const { loggedOut, userInfo } = useSelector(state => state.auth)
 
   const handleLougout = () => {
     dispatch(logout())
   }
 
   useEffect(() => {
-    if (loggedOut) {
+    if (userInfo === null) {
       navigate('/login')
     }
-  }, [loggedOut])
+  }, [userInfo, navigate])
 
 
   return (
+
     <>
       <div className="text-black">Home</div>
       <h1 className="hover:underline hover:text-slate-600" onClick={handleLougout}>Logout</h1>

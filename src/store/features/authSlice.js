@@ -5,7 +5,6 @@ const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null,
     loginLoading: false,
     loginResponseMessage: "",
-    loggedIn: false,
     signUpLoading: false,
     signedUp: false,
     signedUpResponseMessage: "",
@@ -16,7 +15,14 @@ const initialState = {
 const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        clearLoginResponseMessage: (state) => {
+            state.loginResponseMessage = ""
+        },
+        clearSignedUpResponseMessage: (state) => {
+            state.signedUpResponseMessage = ""
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state) => {
             state.loginLoading = true
@@ -26,8 +32,6 @@ const authSlice = createSlice({
             state.loginResponseMessage = action.payload.message,
             state.userInfo = action.payload.user
             localStorage.setItem('userInfo', JSON.stringify(action.payload.user))
-            state.loggedIn = true
-            console.log(action.payload.user);
         })
         builder.addCase(login.rejected, (state, action) => {
             state.loginLoading = false
@@ -38,7 +42,6 @@ const authSlice = createSlice({
             localStorage.removeItem('userInfo')
             state.loggedOut = true
             state.loginResponseMessage = "",
-            state.loggedIn = false,
             state.signUpLoading = false,
             state.signedUp = false,
             state.signedUpResponseMessage = ""
@@ -52,12 +55,12 @@ const authSlice = createSlice({
             state.signedUpResponseMessage = action.payload.message
         })
         builder.addCase(signup.rejected, (state, action) => {
-            state.signUpLoading = true,
+            state.signUpLoading = false,
             state.signedUpResponseMessage = action.payload.message
         })
     }
 })
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, clearLoginResponseMessage, clearSignedUpResponseMessage } = authSlice.actions;
 
 export default authSlice.reducer;
