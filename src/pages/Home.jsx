@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "@/store/features/authAction";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 
@@ -10,10 +9,6 @@ const Home = () => {
   const navigate = useNavigate()
 
   const { userInfo } = useSelector(state => state.auth)
-
-  const handleLougout = () => {
-    dispatch(logout())
-  }
 
   useEffect(() => {
     if (userInfo === null) {

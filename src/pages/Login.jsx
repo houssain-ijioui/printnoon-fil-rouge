@@ -32,7 +32,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (userInfo !== null) {
-      navigate('/')
+      navigate('/profile')
     }
     if (loginResponseMessage !== "") {
       toast(loginResponseMessage, {
