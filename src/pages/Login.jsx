@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/store/features/authAction';
 import toast from 'react-hot-toast';
 import { clearLoginResponseMessage } from '@/store/features/authSlice';
+import { BarLoader } from 'react-spinners';
 
 
 const Signup = () => {
@@ -56,7 +57,9 @@ const Signup = () => {
           <form className='' onSubmit={handleSubmit}>
             <InputField value={email} setValue={setEmail} placeholderText={"Email"} type={"email"} />
             <InputField value={password} setValue={setPassword} placeholderText={"Password"} type={"password"} />
-            <AuthButton text={loginLoading ? "Loading..." :"Login"} />
+            <AuthButton text={loginLoading ? (
+              <BarLoader color="#fff" />
+            ) :"Login"} />
           </form>
         </div>
         <div className='bg-firstBlue py-4 pl-8'>
