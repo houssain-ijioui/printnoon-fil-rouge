@@ -11,7 +11,7 @@ import {
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
-import Profile from './pages/Profile.jsx'
+import Conceptions from './pages/Conceptions.jsx'
 import store from './store/store.js';
 import { Provider } from 'react-redux'
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
-      <Route path='/profile' element={<Profile />} />
+      <Route path='/conceptions' element={<Conceptions />} />
     </Route>
   )
 )

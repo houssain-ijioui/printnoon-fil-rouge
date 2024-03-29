@@ -34,10 +34,6 @@ function Navbar() {
                                         <Link href="#"
                                             className="py-2 pl-3 pr-4 hover:text-thirdBlue">Acceuil</Link>
                                     </li>
-                                    <li>
-                                        <Link href="#"
-                                            className="py-2 pl-3 pr-4 hover:text-thirdBlue">Tableau</Link>
-                                    </li>
                                 </ul>
                             </div>
                             <div className="flex w-2/6">

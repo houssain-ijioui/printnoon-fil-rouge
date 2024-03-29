@@ -6,7 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Card from "@/components/Card";
 
 
-const Profile = () => {
+const Conceptions = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -23,7 +23,9 @@ const Profile = () => {
             <Navbar />
             <div className="flex">
                 <Sidebar />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-7/12 lg:w-9/12 lg:mr-5 pt-8 gap-3">
+                <div className="w-7/12 lg:w-9/12">
+                    <h1 className="text-firstBlue font-semibold text-2xl">Mes Conceptions</h1>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:mr-5 pt-8 gap-3">
                     <Card />
                     <Card />
                     <Card />
@@ -33,9 +35,10 @@ const Profile = () => {
                     <Card />
                     <Card />
                 </div>
+                </div>
             </div>
         </>
     )
 }
 
-export default Profile;
+export default Conceptions;
