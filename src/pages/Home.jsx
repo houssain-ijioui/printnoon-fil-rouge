@@ -1,19 +1,14 @@
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "@/store/features/authAction";
 import { useEffect } from "react";
+import Navbar from "@/components/Navbar";
 
 
 const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { loggedOut, userInfo } = useSelector(state => state.auth)
-
-  const handleLougout = () => {
-    dispatch(logout())
-  }
+  const { userInfo } = useSelector(state => state.auth)
 
   useEffect(() => {
     if (userInfo === null) {
@@ -25,8 +20,9 @@ const Home = () => {
   return (
 
     <>
-      <div className="text-black">Home</div>
-      <h1 className="hover:underline hover:text-slate-600" onClick={handleLougout}>Logout</h1>
+      <Navbar />
+      {/* <div className="text-black">Home</div>
+      <h1 className="hover:underline hover:text-slate-600" onClick={handleLougout}>Logout</h1> */}
     </>
   )
 }
