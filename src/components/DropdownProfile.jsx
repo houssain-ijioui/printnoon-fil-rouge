@@ -23,7 +23,7 @@ const DropdownProfile = ({ profileDropDown }) => {
     }, [userInfo])
 
     return (
-        <div tabIndex="0" className={`dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box w-80 absolute ${profileDropDown ? "": "hidden"}`}>
+        <div tabIndex="0" className={`dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box w-80 absolute bg-slate-100 ${profileDropDown ? "": "hidden"}`}>
             <div className="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral">
                 <div className="flex space-x-4 items-center p-4">
                     <div className="flex mr-auto items-center space-x-4">
@@ -31,7 +31,7 @@ const DropdownProfile = ({ profileDropDown }) => {
                         <div className="space-y-2 flex flex-col flex-1 truncate">
                             <div className="relative leading-tight text-gray-900">
                                 <span className="flex">
-                                    <span className="truncate relative pr-8 text-white">houssain</span>
+                                    <span className="truncate relative pr-8">houssain</span>
                                 </span>
                             </div>
                             <p className="font-normal text-base leading-tight truncate">houssain@gmail.com</p>

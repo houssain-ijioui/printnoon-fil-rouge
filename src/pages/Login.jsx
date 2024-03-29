@@ -62,7 +62,7 @@ const Signup = () => {
             ) :"Login"} />
           </form>
         </div>
-        <div className='bg-firstBlue py-4 pl-8'>
+        <div className='bg-firstBlue py-4 pl-8 hidden md:block'>
           <img src={sideImage} />
         </div>
       </div>

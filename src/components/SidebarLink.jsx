@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 const SidebarLink = ({ link, text }) => {
   return (
-    <div className='hover:bg-thirdBlue px-1 py-2 rounded-lg lg:w-7/12 md:w-10/12 sm:8/12 w-52'>
-        <Link className='font-semibold text-firstBlue' to={link}>{text}</Link>
+    <div className='hover:bg-thirdBlue py-2 rounded-lg lg:w-10/12 md:w-11/12 sm:8/12 w-44 pl-2'>
+        <Link className='font-semibold text-firstBlue text-xs md:text-base' to={link}>{text}</Link>
     </div>
   )
 }
