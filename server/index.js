@@ -2,6 +2,7 @@ import { config } from "dotenv";
 config();
 import express from "express";
 import authRoutes from "./routes/auth.routes.js";
+import userDashboardRoutes from "./routes/userDashboard.routes.js";
 import DB from "./lib/db.js";
 import routeNotFound from "./middlwares/route-not-found.middlware.js";
 import cors from "cors";
@@ -22,6 +23,9 @@ db.connect()
 
 // authetification routes
 app.use('/api/auth', authRoutes);
+
+// user dashboard routes
+app.use('/user/dashboard', userDashboardRoutes);
 
 
 // non existing routes

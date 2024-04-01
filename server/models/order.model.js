@@ -14,6 +14,10 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    retour: {
+        type: String,
+        required: true
+    },
     grammage: {
         type: String,
         required: true
@@ -23,6 +27,10 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     orientation: {
+        type: String,
+        required: true
+    },
+    file: {
         type: String,
         required: true
     }
