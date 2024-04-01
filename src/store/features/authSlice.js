@@ -30,8 +30,8 @@ const authSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.loginLoading = false
             state.loginResponseMessage = action.payload.message,
-            state.userInfo = action.payload.user
-            localStorage.setItem('userInfo', JSON.stringify(action.payload.user))
+            state.userInfo = action.payload.token
+            localStorage.setItem('userInfo', JSON.stringify(action.payload.token))
         })
         builder.addCase(login.rejected, (state, action) => {
             state.loginLoading = false

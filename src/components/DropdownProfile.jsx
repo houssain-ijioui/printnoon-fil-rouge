@@ -1,14 +1,16 @@
 import pic from "../assets/auth/pic.jpg"
 import { logout } from "@/store/features/authAction"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import parseJwt from "../fUtils/parseJwt.js"
 
 
 
 const DropdownProfile = ({ profileDropDown }) => {
     const { userInfo } = useSelector(state => state.auth)
+    const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -31,10 +33,10 @@ const DropdownProfile = ({ profileDropDown }) => {
                         <div className="space-y-2 flex flex-col flex-1 truncate">
                             <div className="relative leading-tight text-gray-900">
                                 <span className="flex">
-                                    <span className="truncate relative pr-8">houssain</span>
+                                    <span className="truncate relative pr-8">{decoded.name}</span>
                                 </span>
                             </div>
-                            <p className="font-normal text-base leading-tight truncate">houssain@gmail.com</p>
+                            <p className="font-normal text-base leading-tight truncate">{decoded.email}</p>
                         </div>
                     </div>
                 </div>
