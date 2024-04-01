@@ -18,9 +18,9 @@ const CommandeCard = () => {
                 <CommandDetail title={"Date de creation"} description={"23-07-2023"} />
                 <CommandDetail title={"N° d'identification"} description={"b4a25180-2816-4c50-a093-5b7013637ed0"} />
             </div>
-            <div className='flex'>
-                <PrimaryButton text={"Modifier"} />
-                <PrimaryButton text={"Supprimer"} />
+            <div className='flex mt-3'>
+                <button className='text-white bg-firstBlue w-5/12 sm:w-32 h-10 rounded-3xl mr-4'>Modifier</button>
+                <button className='bg-white text-firstBlue w-5/12 sm:w-32 h-10 rounded-3xl border border-thirdBlue'>Supprimer</button>
             </div>
         </div>
         <div className='bg-slate-300'>
