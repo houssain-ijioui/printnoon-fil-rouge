@@ -49,11 +49,11 @@ const login = async (req, res) => {
             })
         }
 
-        generateToken(res, user._id)
+        const token = generateToken(res, user)
 
         res.status(200).json({
             message: "Logged In",
-            user
+            token
         })
     } catch (error) {
         return res.status(500).json({
