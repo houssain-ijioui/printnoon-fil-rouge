@@ -7,12 +7,14 @@ import DB from "./lib/db.js";
 import routeNotFound from "./middlwares/route-not-found.middlware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 const app = express();
 
 
 // express middlwares
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors({ origin: true }));
 app.use(cookieParser());
 

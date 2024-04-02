@@ -30,9 +30,8 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    file: {
+    fileName: {
         type: String,
-        required: true
     }
 }, {
     timestamps: true
