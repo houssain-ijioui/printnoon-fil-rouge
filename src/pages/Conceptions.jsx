@@ -5,13 +5,18 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Card from "@/components/Card";
 import PrimaryButton from "@/components/PrimaryButton";
-
+import CreateOrderModal from "../components/CreateOrderModal";
+import { openModal } from "@/store/features/authSlice";
 
 const Conceptions = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const { userInfo } = useSelector(state => state.auth)
+
+    const open = () => {
+        dispatch(openModal())
+    }
 
     useEffect(() => {
         if (userInfo === null) {
@@ -27,8 +32,9 @@ const Conceptions = () => {
                 <div className="w-7/12 lg:w-9/12">
                     <div className="flex justify-between lg:mr-5">
                         <h1 className="text-firstBlue font-semibold text-2xl">Mes Conceptions</h1>
-                        <PrimaryButton text={"Ajouter"} /> 
+                        <PrimaryButton onClick={open} text={"Ajouter"} /> 
                     </div>
+                    <CreateOrderModal />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:mr-5 pt-8 gap-3">
                         <Card />
                         <Card />

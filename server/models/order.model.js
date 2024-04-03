@@ -16,15 +16,12 @@ const orderSchema = new mongoose.Schema({
     },
     retour: {
         type: String,
-        required: true
     },
     grammage: {
         type: String,
-        required: true
     },
     coins: {
         type: String,
-        required: true
     },
     orientation: {
         type: String,

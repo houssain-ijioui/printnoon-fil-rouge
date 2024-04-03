@@ -10,7 +10,8 @@ const randomFileName = () => crypto.randomBytes(32).toString('hex');
 
 
 const createOrder = async (req, res) => {
-    const { nom, dimensions, papier, retour, grammage, coins, orientation } = req.body;
+    const { nom, dimensions, papier, grammage, orientation } = JSON.parse(req.body.order)
+
     const randomName = randomFileName()
     try {
         // save file to s3
@@ -28,10 +29,8 @@ const createOrder = async (req, res) => {
         const order = new Order({
             nom, 
             dimensions, 
-            retour, 
             papier, 
             grammage, 
-            coins, 
             orientation,
             fileName: randomName
         })

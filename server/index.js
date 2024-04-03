@@ -15,6 +15,7 @@ const app = express();
 // express middlwares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors({ origin: true }));
 app.use(cookieParser());
 
