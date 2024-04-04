@@ -1,7 +1,8 @@
 import { config } from "dotenv";
 config();
 import Order from "../models/order.model.js";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "../utils/s3.js";
 import crypto from "crypto";
 
@@ -41,7 +42,6 @@ const createOrder = async (req, res) => {
             message: "Order Created"
         })
     } catch (error) {
-        console.log(error);
         return res.status(500).json({
             message: "Oops something went wrong"
         })
@@ -49,4 +49,28 @@ const createOrder = async (req, res) => {
 }
 
 
-export default { createOrder };
+const orders = async (req, res) => {
+    try {
+        const orders = await Order.find()
+        const data = [];
+        for (const order of orders) {
+            const getObjetParams = {
+                Bucket: bucketName,
+                Key: order.fileName
+            }
+            const command = new GetObjectCommand(getObjetParams)
+            const url = await getSignedUrl(s3, command, { expiresIn: 3600 })
+            data.push({ order, fileUrl: url })
+        }
+        return res.status(201).json({
+            data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+
+export default { createOrder, orders };

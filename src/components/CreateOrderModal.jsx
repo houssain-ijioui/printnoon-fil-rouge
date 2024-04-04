@@ -39,7 +39,7 @@ const CreateOrderModal = () => {
       const formData = new FormData()
       formData.append('order', JSON.stringify(order))
       formData.append('file', file)
-      await axios.post('http://localhost:8000/user/dashboard/create-order', formData)
+      axios.post('http://localhost:8000/user/dashboard/create-order', formData)
       dispatch(closeModal())
       setOrder(initialOrderState)
     } catch (error) {
@@ -59,7 +59,7 @@ const CreateOrderModal = () => {
             </div>
             <div className="mb-4">
               <select name='dimensions' value={order.dimensions} required id="dimensions" className='w-full p-2 rounded' onChange={handleInput}>
-                <option disabled>Dimensions</option>
+                <option value="" disabled>Dimensions</option>
                 <option value="Standard 89× 51">Standard 89× 51</option>
                 <option value="Carré 51 × 51">Carré 51 × 51</option>
                 <option value="Coins arrondis 89 × 51">Coins arrondis 89 × 51</option>

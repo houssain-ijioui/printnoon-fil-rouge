@@ -6,6 +6,7 @@ import upload from "../middlwares/fileUploader.js";
 
 
 router.post('/create-order', upload.single('file'), userDashboardController.createOrder);
+router.get('/orders', userDashboardController.orders)
 
 
 export default router;
