@@ -14,14 +14,15 @@ const CreateOrderModal = () => {
     dispatch(closeModal())
   }
 
-  const [ file, setFile ] = useState()
-  const [ order, setOrder ] = useState({
+  const initialOrderState = {
     nom: "",
     dimensions: "",
     papier: "",
     grammage: "",
     orientation: ""
-  })
+  };
+  const [ file, setFile ] = useState()
+  const [ order, setOrder ] = useState(initialOrderState)
 
 
   const handleFileInput = (e) => {
@@ -40,6 +41,7 @@ const CreateOrderModal = () => {
       formData.append('file', file)
       await axios.post('http://localhost:8000/user/dashboard/create-order', formData)
       dispatch(closeModal())
+      setOrder(initialOrderState)
     } catch (error) {
       console.log(error);
     }
