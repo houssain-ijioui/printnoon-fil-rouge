@@ -5,9 +5,9 @@ import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@/store/features/authAction';
+import { login } from '@/store/features/auth/authAction';
 import toast from 'react-hot-toast';
-import { clearLoginResponseMessage } from '@/store/features/authSlice';
+import { clearLoginResponseMessage } from '@/store/features/auth/authSlice';
 import { BarLoader } from 'react-spinners';
 
 
@@ -61,9 +61,6 @@ const Signup = () => {
               <BarLoader color="#fff" />
             ) :"Login"} />
           </form>
-        </div>
-        <div className='bg-firstBlue py-4 pl-8 hidden md:block'>
-          <img src={sideImage} />
         </div>
       </div>
     </div>

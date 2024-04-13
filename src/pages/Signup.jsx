@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
 import { useEffect, useState } from 'react';
-import { signup } from '@/store/features/authAction';
+import { signup } from '@/store/features/auth/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { clearSignedUpResponseMessage } from '@/store/features/authSlice';
+import { clearSignedUpResponseMessage } from '@/store/features/auth/authSlice';
 import { BarLoader } from 'react-spinners';
 
 
@@ -57,9 +57,6 @@ const Signup = () => {
               <BarLoader color='#fff' />
             ):"Signup"} />
           </form>
-        </div>
-        <div className='bg-firstBlue py-4 pl-8'>
-          <img src={sideImage} />
         </div>
       </div>
     </div>
