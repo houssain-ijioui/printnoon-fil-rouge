@@ -12,6 +12,7 @@ const Commandes = () => {
     const navigate = useNavigate()
 
     const { userInfo } = useSelector(state => state.auth)
+    const { orders, ordersPending } = useSelector(state => state.order)
 
     useEffect(() => {
         if (userInfo === null) {
@@ -30,9 +31,15 @@ const Commandes = () => {
                         <PrimaryButton text={"Ajouter"} /> 
                     </div>
                     <div className="flex flex-col gap-4 mt-8 mr-5">
-                        <CommandeCard />
-                        <CommandeCard />
-                        <CommandeCard />
+                        {ordersPending ? (
+                            <h1>Pending</h1>
+                        ) : (
+                            orders?.map((order, index) => {
+                                return (
+                                    <CommandeCard nom={order.order.nom} fileUrl={order.fileUrl} dimensions={order.order.dimensions} papier={order.order.papier} grammage={order.order.grammage} orientation={order.order.orientation} key={index} createdAt={order.order.createdAt} />
+                                )
+                            })
+                        )}
                     </div>
                 </div>
             </div>
