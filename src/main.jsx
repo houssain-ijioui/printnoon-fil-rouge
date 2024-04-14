@@ -15,6 +15,7 @@ import Conceptions from './pages/Conceptions.jsx'
 import Commandes from './pages/Commandes.jsx'
 import store from './store/store.js';
 import { Provider } from 'react-redux'
+import Profile from './pages/Profile.jsx'
 
 
 const router = createBrowserRouter(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<Signup />} />
       <Route path='/conceptions' element={<Conceptions />} />
       <Route path='/commandes' element={<Commandes />} />
+      <Route path='/profile' element={<Profile />} />
     </Route>
   )
 )

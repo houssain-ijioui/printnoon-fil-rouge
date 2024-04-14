@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
 import Order from "../models/order.model.js";
-import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "../utils/s3.js";
 import crypto from "crypto";
@@ -77,6 +77,12 @@ const deleteOrder = async (req, res) => {
     try {
         const { orderId } = req.params;
         const order = await Order.findByIdAndDelete(orderId)
+        const params = {
+            Bucket: bucketName,
+            Key: order.fileName
+        }
+        const command = new DeleteObjectCommand(params)
+        await s3.send(command)
         return res.status(200).json({
             message: "Order deleted"
         })
