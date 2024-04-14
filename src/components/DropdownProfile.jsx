@@ -33,10 +33,10 @@ const DropdownProfile = ({ profileDropDown }) => {
                         <div className="space-y-2 flex flex-col flex-1 truncate">
                             <div className="relative leading-tight text-gray-900">
                                 <span className="flex">
-                                    <span className="truncate relative pr-8"></span>
+                                    <span className="truncate relative pr-8">{decoded?.name}</span>
                                 </span>
                             </div>
-                            <p className="font-normal text-base leading-tight truncate"></p>
+                            <p className="font-normal text-base leading-tight truncate">{decoded?.email} </p>
                         </div>
                     </div>
                 </div>

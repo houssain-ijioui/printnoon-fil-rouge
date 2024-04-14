@@ -21,7 +21,7 @@ import Profile from './pages/Profile.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
-      <Route index={true} path='/' element={<Home />} />
+      <Route path='/home' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/conceptions' element={<Conceptions />} />

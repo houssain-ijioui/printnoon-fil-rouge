@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { clearSignedUpResponseMessage } from '@/store/features/auth/authSlice';
 import { BarLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -21,6 +22,7 @@ const Signup = () => {
   const { signUpLoading, signedUpResponseMessage } = useSelector((state) => state.auth)
 
   const dispatch  = useDispatch()
+  const navigate = useNavigate()
 
 
   const handleRegister = async (e) => {
@@ -34,6 +36,7 @@ const Signup = () => {
         duration: 1900
       })
       dispatch(clearSignedUpResponseMessage())
+      navigate("/login")
     }
   }, [signedUpResponseMessage])
 

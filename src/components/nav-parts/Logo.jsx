@@ -6,7 +6,7 @@ import logo from "../../assets/main-logo-printnoon.png";
 
 const Logo = () => {
   return (
-    <Link to="/">
+    <Link to="/home">
         <img className="" src={logo}></img>
     </Link>
   )
