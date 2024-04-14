@@ -13,3 +13,12 @@ export const getOrders = createAsyncThunk("order/getOrders", async (data, { reje
         rejectWithValue(error.response.data.message)
     }
 })
+
+export const deleteOrder = createAsyncThunk("order/deleteOrder", async (data, { rejectWithValue }) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/order/${data}`)
+        return response.data.message
+    } catch (error) {
+        rejectWithValue(error.response.data.message)
+    }
+})

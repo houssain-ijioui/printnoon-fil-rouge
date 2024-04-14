@@ -73,4 +73,18 @@ const orders = async (req, res) => {
 }
 
 
-export default { createOrder, orders };
+const deleteOrder = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const order = await Order.findByIdAndDelete(orderId)
+        return res.status(200).json({
+            message: "Order deleted"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+export default { createOrder, orders, deleteOrder };

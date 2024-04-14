@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getOrders } from "./orderAction";
+import { getOrders, deleteOrder } from "./orderAction";
 
 const initialState = {
     modal: false,
     orders: [],
-    ordersPending: false
+    ordersPending: false,
+    deleted: false,
+    deletedMessage: ""
 }
 
 const orderSlice = createSlice({
@@ -16,6 +18,15 @@ const orderSlice = createSlice({
         },
         closeModal: (state) => {
             state.modal = false
+        },
+        setDeleted: (state) => {
+            state.deleted = true
+        },
+        unSetDeleted: (state) => {
+            state.deleted = false
+        },
+        clearDeletedMessage: (state) => {
+            state.deletedMessage = ""
         }
     },
     extraReducers: (builder) => {
@@ -27,12 +38,14 @@ const orderSlice = createSlice({
         }).addCase(getOrders.rejected, (state, action) => {
             console.log("ERROR", action);
             state.ordersPending = false
-        })
+        }).addCase(deleteOrder.fulfilled, (state, action) => {
+            state.deletedMessage = action.payload
+        } )
     }
 })
 
 
 
-export const { openModal, closeModal } = orderSlice.actions;
+export const { openModal, closeModal, setDeleted, unSetDeleted, clearDeletedMessage } = orderSlice.actions;
 
 export default orderSlice.reducer;
