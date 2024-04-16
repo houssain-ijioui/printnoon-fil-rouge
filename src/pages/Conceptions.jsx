@@ -9,6 +9,7 @@ import CreateOrderModal from "../components/CreateOrderModal";
 import { openModal } from "@/store/features/order/orderSlice";
 import { getOrders } from "@/store/features/order/orderAction";
 import parseJwt from "@/fUtils/parseJwt";
+import { ClipLoader } from "react-spinners";
 
 
 
@@ -47,7 +48,9 @@ const Conceptions = () => {
                     <CreateOrderModal />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:mr-5 pt-8 gap-3">
                         {ordersPending ? (
-                            <h1>Pending</h1>
+                            <div className="mt-20 ml-96">
+                                <ClipLoader size={80} color="#36d7b7" />
+                            </div>
                         ) : (
                             orders?.map((order, index) => {
                                 return (

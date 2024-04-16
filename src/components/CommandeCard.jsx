@@ -10,6 +10,11 @@ import { setDeleted } from '@/store/features/order/orderSlice';
 
 
 const CommandeCard = ({ nom, dimensions, papier, grammage, orientation, createdAt, fileUrl, orderId }) => {
+    const date = new Date(createdAt)
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    
     const dispatch = useDispatch()
 
     const handleDelete = (orderId) => {
@@ -31,7 +36,7 @@ const CommandeCard = ({ nom, dimensions, papier, grammage, orientation, createdA
                     <CommandDetail title={"Papier"} description={papier} />
                     <CommandDetail title={"Grammage"} description={grammage} />
                     <CommandDetail title={"Orientation"} description={orientation} />
-                    <CommandDetail title={"Date de creation"} description={createdAt} />
+                    <CommandDetail title={"Date de creation"} description={`${year}-${month}-${day}`} />
                 </div>
                 <div className='flex mt-3'>
                     <Link target='_blank' to={fileUrl} className='text-white bg-firstBlue text-center w-5/12 sm:w-36 h-10 rounded-3xl mr-4 pt-2'>Ouvrir le fichier</Link>

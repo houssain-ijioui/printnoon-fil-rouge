@@ -31,7 +31,7 @@ function Navbar() {
                             <div className={`items-center justify-between w-full`} id="mobile-menu-2">
                                 <ul className="flex font-medium mt-2">
                                     <li>
-                                        <Link href="#"
+                                        <Link to={"/home"}
                                             className="py-2 pl-3 pr-4 hover:text-thirdBlue">Acceuil</Link>
                                     </li>
                                 </ul>
