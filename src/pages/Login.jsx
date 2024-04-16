@@ -48,7 +48,7 @@ const Signup = () => {
       <AuthNavbar />
       <div className='flex flex-row justify-between grow'>
         <div className='py-16 px-20'>
-          <h1 className='text-3xl font-semibold tracking-wide mb-3 w-5/5'>Emballage de fole digne de ce nom, trie !</h1>
+          <h1 className='text-3xl font-semibold tracking-wide mb-3 w-5/5'>Emballage de fole digne de ce nom !</h1>
           <h4 className='text-secondBlue font-semibold text-base mb-3'>Connectez-vous pour suiver vos conceptions et vos commandes, le tout en un seul endroit.</h4>
           <div className='flex flex-row mb-3'>
             <h4 className='font-semibold'>Déja inscris ?</h4>

@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 
 const orderSchema = new mongoose.Schema({
-    creator: {
-        type: mongoose.Types.ObjectId,
-        ref: "User"
-    },
     nom: {
         type: String,
         required: true
