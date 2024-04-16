@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:8000/user/dashboard";
 
 export const getOrders = createAsyncThunk("order/getOrders", async (data, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`${BASE_URL}/orders`)
+        const response = await axios.get(`${BASE_URL}/orders/${data}`)
         return response.data.data
     } catch (error) {
         rejectWithValue(error.response.data.message)
