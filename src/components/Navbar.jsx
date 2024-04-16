@@ -4,7 +4,7 @@ import 'flowbite'; // Import Flowbite CSS (if it's not included in your CSS bund
 import 'flowbite/dist/flowbite.js'; // Import Flowbite JavaScript
 import { useState } from "react";
 import DropdownProfile from "./DropdownProfile";
-import pic from "../assets/auth/pic.jpg"
+import userImage from "../assets/auth/userimage.jpg"
 
 
 
@@ -38,7 +38,7 @@ function Navbar() {
                             </div>
                             <div className="flex w-2/6">
                                 <div className="m-auto">
-                                    <img onClick={toggleProfileDropDown} className="w-10 h-10 rounded-full cursor-pointer" src={pic} alt="profile image" />
+                                    <img onClick={toggleProfileDropDown} className="w-10 h-10 rounded-full cursor-pointer" src={userImage} alt="profile image" />
                                 </div>
                             </div>
                         </div>

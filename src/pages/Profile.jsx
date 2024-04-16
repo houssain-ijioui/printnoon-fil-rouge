@@ -1,11 +1,12 @@
 import Navbar from "@/components/Navbar"
 import Sidebar from "@/components/Sidebar"
 import pic from "../assets/auth/pic.jpg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { useSelector } from 'react-redux';
 import parseJwt from "../fUtils/parseJwt.js";
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 
 
@@ -15,6 +16,7 @@ const Profile = () => {
     const { userInfo } = useSelector(state => state.auth)
     const [decoded, setDecoded] = useState(parseJwt(userInfo))
     const navigate = useNavigate()
+    const [ imageChanged, setImageChanged ] = useState(false)
 
     const handleInput = (e) => {
         setImage(e.target.files[0])
@@ -27,11 +29,19 @@ const Profile = () => {
             formData.append('id', JSON.stringify(decoded?.id))
             formData.append('image', image)
             axios.post('http://localhost:8000/user/dashboard/change-image', formData)
-            navigate('/profile')
+            setImageChanged(true)
         } catch (error) {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        if (imageChanged) {
+            toast('Image Changed Successfully')
+            navigate('/profile')
+        }
+    }, [imageChanged, navigate])
+
     return (
         <>
             <Navbar />
@@ -41,7 +51,6 @@ const Profile = () => {
                     <div className="lg:mr-5">
                         <h1 className="text-firstBlue font-semibold text-2xl mb-5">Paramétres du Compte</h1>
                         <div>
-                            <img src={pic} className="w-14 h-14 shrink-0 rounded-full" />
                             <form>
                                 <input onChange={handleInput} required type="file" className=" mb-5" />
                                 <button onClick={handleImageChange} type="submit" className="text-white bg-firstBlue w-5/12 sm:w-36 h-10 rounded-3xl border border-thirdBlue">Changer L'image</button>

@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getOrders, deleteOrder } from "./orderAction";
+import { getOrders, deleteOrder, getImage } from "./orderAction";
 
 const initialState = {
     modal: false,
     orders: [],
     ordersPending: false,
     deleted: false,
-    deletedMessage: ""
+    deletedMessage: "",
+    profileImage: null
 }
 
 const orderSlice = createSlice({
@@ -40,7 +41,9 @@ const orderSlice = createSlice({
             state.ordersPending = false
         }).addCase(deleteOrder.fulfilled, (state, action) => {
             state.deletedMessage = action.payload
-        } )
+        } ).addCase(getImage.fulfilled, (state, action) => {
+            state.profileImage = action.payload
+        })
     }
 })
 

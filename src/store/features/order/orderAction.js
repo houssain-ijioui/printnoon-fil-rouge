@@ -22,3 +22,13 @@ export const deleteOrder = createAsyncThunk("order/deleteOrder", async (data, { 
         rejectWithValue(error.response.data.message)
     }
 })
+
+
+export const getImage = createAsyncThunk("order/getImage", async (data, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/get-profile-image/${data}`)
+        return response.data.message
+    } catch (error) {
+        rejectWithValue(error.response.data.message)
+    }
+})
