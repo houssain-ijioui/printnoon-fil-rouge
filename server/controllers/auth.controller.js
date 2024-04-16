@@ -20,7 +20,6 @@ const signup = async (req, res) => {
             message: "User Created Successfully",
         })
     } catch (error) {
-        console.log(error);
         return res.status(500).json({
             message: "Oops somehing went wrong"
         })
