@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Card from "@/components/Card";
@@ -8,12 +8,16 @@ import PrimaryButton from "@/components/PrimaryButton";
 import CreateOrderModal from "../components/CreateOrderModal";
 import { openModal } from "@/store/features/order/orderSlice";
 import { getOrders } from "@/store/features/order/orderAction";
+import parseJwt from "@/fUtils/parseJwt";
+
+
 
 const Conceptions = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const { userInfo } = useSelector(state => state.auth)
+    const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
     const { orders, ordersPending } = useSelector(state => state.order)
 
     const open = () => {
@@ -27,7 +31,7 @@ const Conceptions = () => {
     }, [userInfo, navigate])
 
     useEffect(() => {
-        dispatch(getOrders())
+        dispatch(getOrders(decoded.id))
     }, [])
 
     return (

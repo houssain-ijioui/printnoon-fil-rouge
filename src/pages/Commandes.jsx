@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import CommandeCard from "@/components/CommandeCard";
 import { getOrders } from "@/store/features/order/orderAction";
 import { clearDeletedMessage, unSetDeleted } from "@/store/features/order/orderSlice";
 import toast from "react-hot-toast";
+import parseJwt from "@/fUtils/parseJwt";
 
 
 
@@ -15,6 +16,7 @@ const Commandes = () => {
     const navigate = useNavigate()
 
     const { userInfo } = useSelector(state => state.auth)
+    const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
     const { orders, ordersPending, deleted, deletedMessage } = useSelector(state => state.order)
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const Commandes = () => {
     }, [userInfo, navigate])
 
     useEffect(() => {
-        dispatch(getOrders())
+        dispatch(getOrders(decoded.id))
         dispatch(unSetDeleted())
     }, [deleted])
 

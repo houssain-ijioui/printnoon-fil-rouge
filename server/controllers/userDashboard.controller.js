@@ -13,7 +13,7 @@ const randomFileName = () => crypto.randomBytes(32).toString('hex');
 
 
 const createOrder = async (req, res) => {
-    const { nom, dimensions, papier, grammage, orientation } = JSON.parse(req.body.order)
+    const { id, nom, dimensions, papier, grammage, orientation } = JSON.parse(req.body.order)
 
     const randomName = randomFileName()
     try {
@@ -30,6 +30,7 @@ const createOrder = async (req, res) => {
 
         // save order to mongo db
         const order = new Order({
+            creator: id,
             nom,
             dimensions,
             papier,
@@ -52,8 +53,9 @@ const createOrder = async (req, res) => {
 
 
 const orders = async (req, res) => {
+    const { userId } = req.params
     try {
-        const orders = await Order.find().sort('-createdAt')
+        const orders = await Order.find({ creator: userId }).sort('-createdAt')
         const data = [];
         for (const order of orders) {
             const getObjetParams = {

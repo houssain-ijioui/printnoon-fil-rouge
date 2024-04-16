@@ -13,7 +13,6 @@ const CommandeCard = ({ nom, dimensions, papier, grammage, orientation, createdA
     const dispatch = useDispatch()
 
     const handleDelete = (orderId) => {
-        console.log(orderId);
         try {
             dispatch(deleteOrder(orderId))
             dispatch(setDeleted())

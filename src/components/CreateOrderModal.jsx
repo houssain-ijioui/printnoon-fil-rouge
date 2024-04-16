@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { closeModal } from '@/store/features/order/orderSlice';
 import axios from 'axios';
 import { getOrders } from '@/store/features/order/orderAction';
+import parseJwt from '@/fUtils/parseJwt';
 
 
 const CreateOrderModal = () => {
+  const { userInfo } = useSelector(state => state.auth)
+  const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
 
   const { modal } = useSelector(state => state.order);
   const dispatch = useDispatch()
@@ -16,6 +19,7 @@ const CreateOrderModal = () => {
   }
 
   const initialOrderState = {
+    id: decoded.id,
     nom: "",
     dimensions: "",
     papier: "",
@@ -43,7 +47,7 @@ const CreateOrderModal = () => {
       await axios.post('http://localhost:8000/user/dashboard/create-order', formData)
       dispatch(closeModal())
       setOrder(initialOrderState)
-      dispatch(getOrders())
+      dispatch(getOrders(decoded.id))
     } catch (error) {
       console.log(error);
     }
