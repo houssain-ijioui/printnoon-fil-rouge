@@ -9,7 +9,6 @@ const initialState = {
     signedUp: false,
     signedUpResponseMessage: "",
     loggedOut: false,
-    modal: false
 }
 
 
@@ -22,12 +21,6 @@ const authSlice = createSlice({
         },
         clearSignedUpResponseMessage: (state) => {
             state.signedUpResponseMessage = ""
-        },
-        openModal: (state) => {
-            state.modal = true
-        },
-        closeModal: (state) => {
-            state.modal = false
         }
     },
     extraReducers: (builder) => {
@@ -68,6 +61,6 @@ const authSlice = createSlice({
     }
 })
 
-export const { setCredentials, clearLoginResponseMessage, clearSignedUpResponseMessage, openModal, closeModal } = authSlice.actions;
+export const { setCredentials, clearLoginResponseMessage, clearSignedUpResponseMessage } = authSlice.actions;
 
 export default authSlice.reducer;

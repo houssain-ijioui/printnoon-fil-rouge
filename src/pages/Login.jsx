@@ -5,9 +5,9 @@ import InputField from '@/components/ui/InputField';
 import AuthButton from '@/components/ui/AuthButton';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@/store/features/authAction';
+import { login } from '@/store/features/auth/authAction';
 import toast from 'react-hot-toast';
-import { clearLoginResponseMessage } from '@/store/features/authSlice';
+import { clearLoginResponseMessage } from '@/store/features/auth/authSlice';
 import { BarLoader } from 'react-spinners';
 
 
@@ -48,7 +48,7 @@ const Signup = () => {
       <AuthNavbar />
       <div className='flex flex-row justify-between grow'>
         <div className='py-16 px-20'>
-          <h1 className='text-3xl font-semibold tracking-wide mb-3 w-5/5'>Emballage de fole digne de ce nom, trie !</h1>
+          <h1 className='text-3xl font-semibold tracking-wide mb-3 w-5/5'>Emballage de fole digne de ce nom !</h1>
           <h4 className='text-secondBlue font-semibold text-base mb-3'>Connectez-vous pour suiver vos conceptions et vos commandes, le tout en un seul endroit.</h4>
           <div className='flex flex-row mb-3'>
             <h4 className='font-semibold'>Déja inscris ?</h4>
@@ -61,9 +61,6 @@ const Signup = () => {
               <BarLoader color="#fff" />
             ) :"Login"} />
           </form>
-        </div>
-        <div className='bg-firstBlue py-4 pl-8 hidden md:block'>
-          <img src={sideImage} />
         </div>
       </div>
     </div>

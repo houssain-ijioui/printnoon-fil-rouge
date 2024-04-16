@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  server:
+    image: node:16
+    container_name: server
+    working_dir: /app
+    command: npm run back
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./:/app"
+  client:
+    image: node:16
+    container_name: client
+    working_dir: /app
+    command: npm run front
+    ports:
+      - "7000:7000"
+    volumes:
+      - "./:/app"
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: houssain
+      MONGO_INITDB_ROOT_PASSWORD: Bl5Mb3kxgIYe0TpS
+    volumes:
+      - db-data:/data/db
+volumes:
+  db-data: {}

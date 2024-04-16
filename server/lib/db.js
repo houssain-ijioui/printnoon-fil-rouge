@@ -7,13 +7,12 @@ class DB {
 
     async connect() {
         try {
-            const conn = await mongoose.connect(this.uri, {
+            await mongoose.connect(this.uri, {
                 dbName: process.env.DB_NAME
             })
-            console.log(`DB Connected ${conn.connection.host}`);
+            console.log(`DB Connected`);
         } catch (error) {
             console.log("DB Error", error);
-            process.exit(1)
         }
     }
 }

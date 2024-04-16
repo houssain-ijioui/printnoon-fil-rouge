@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
+import { useState } from 'react'
+import { Modal } from "flowbite-react";
 import { useSelector, useDispatch } from 'react-redux';
-import { closeModal } from '@/store/features/authSlice';
+import { closeModal } from '@/store/features/order/orderSlice';
 import axios from 'axios';
+import { getOrders } from '@/store/features/order/orderAction';
 
 
 const CreateOrderModal = () => {
 
-  const { modal } = useSelector(state => state.auth);
+  const { modal } = useSelector(state => state.order);
   const dispatch = useDispatch()
 
   const close = () => {
@@ -21,12 +22,12 @@ const CreateOrderModal = () => {
     grammage: "",
     orientation: ""
   };
-  const [ file, setFile ] = useState()
-  const [ order, setOrder ] = useState(initialOrderState)
+  const [file, setFile] = useState()
+  const [order, setOrder] = useState(initialOrderState)
 
 
   const handleFileInput = (e) => {
-    setFile(e.target.files[0]) 
+    setFile(e.target.files[0])
   }
 
   const handleInput = (e) => {
@@ -42,10 +43,11 @@ const CreateOrderModal = () => {
       await axios.post('http://localhost:8000/user/dashboard/create-order', formData)
       dispatch(closeModal())
       setOrder(initialOrderState)
+      dispatch(getOrders())
     } catch (error) {
       console.log(error);
     }
-  } 
+  }
 
 
   return (
@@ -59,7 +61,7 @@ const CreateOrderModal = () => {
             </div>
             <div className="mb-4">
               <select name='dimensions' value={order.dimensions} required id="dimensions" className='w-full p-2 rounded' onChange={handleInput}>
-                <option disabled>Dimensions</option>
+                <option value="" disabled>Dimensions</option>
                 <option value="Standard 89× 51">Standard 89× 51</option>
                 <option value="Carré 51 × 51">Carré 51 × 51</option>
                 <option value="Coins arrondis 89 × 51">Coins arrondis 89 × 51</option>

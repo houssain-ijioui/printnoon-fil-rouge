@@ -14,13 +14,7 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    retour: {
-        type: String,
-    },
     grammage: {
-        type: String,
-    },
-    coins: {
         type: String,
     },
     orientation: {

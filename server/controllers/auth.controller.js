@@ -10,7 +10,8 @@ const signup = async (req, res) => {
         const user = new User({
             name,
             email,
-            password
+            password,
+            profileImage: null
         })
 
         await user.save()
