@@ -22,14 +22,12 @@ Printnoon is an innovative platform that empowers users to transform their desig
 
 ## Clone Repository
 
-To clone this repository to your local machine, use the following command:
+To clone this repository to your local machine, use the following commands:
 
 ```bash
 git clone https://github.com/houssain-ijioui/printnoon-fil-rouge.git
 
-```bash
 npm i
 
-```bash
 npm run dev
 
