@@ -118,11 +118,30 @@ const changeImage = async (req, res) => {
             message: "Image Updated"
         })
     } catch (error) {
-        console.log(error);
         return res.status(500).json({
             message: "Oops something went wrong"
         })
     }
 }
 
-export default { createOrder, orders, deleteOrder, changeImage };
+
+const getImage = async (req, res) => {
+    const { data } = req.params
+    try {
+        const getObjectParams = {
+            Bucket: bucketImages,
+            Key: data
+        }
+        const command = new GetObjectCommand(getObjectParams)
+        const url = await getSignedUrl(s3, command, { expiresIn: 3600 })
+        res.status(200).json({
+            message: url
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Oops something went wrong"
+        })
+    }
+}
+
+export default { createOrder, orders, deleteOrder, changeImage, getImage };

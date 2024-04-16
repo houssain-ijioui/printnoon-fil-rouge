@@ -1,4 +1,5 @@
 import pic from "../assets/auth/pic.jpg"
+import userImage from "../assets/auth/userimage.jpg";
 import { logout } from "@/store/features/auth/authAction"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
@@ -29,7 +30,7 @@ const DropdownProfile = ({ profileDropDown }) => {
             <div className="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral">
                 <div className="flex space-x-4 items-center p-4">
                     <div className="flex mr-auto items-center space-x-4">
-                        <img src={pic} alt="Name" className="w-12 h-12 shrink-0 rounded-full" />
+                        <img src={userImage} alt="Name" className="w-12 h-12 shrink-0 rounded-full" />
                         <div className="space-y-2 flex flex-col flex-1 truncate">
                             <div className="relative leading-tight text-gray-900">
                                 <span className="flex">
