@@ -8,6 +8,7 @@ import { getOrders } from "@/store/features/order/orderAction";
 import { clearDeletedMessage, unSetDeleted } from "@/store/features/order/orderSlice";
 import toast from "react-hot-toast";
 import parseJwt from "@/fUtils/parseJwt";
+import { ClipLoader } from "react-spinners";
 
 
 
@@ -50,7 +51,9 @@ const Commandes = () => {
                     </div>
                     <div className="flex flex-col gap-4 mt-8 mr-5">
                         {ordersPending ? (
-                            <h1>Pending</h1>
+                            <div className="mt-20 ml-96">
+                                <ClipLoader size={80} color="#36d7b7" />
+                            </div>
                         ) : (
                             orders?.map((order, index) => {
                                 return (
