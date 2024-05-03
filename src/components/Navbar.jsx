@@ -2,19 +2,26 @@ import { Link } from "react-router-dom";
 import Logo from "./nav-parts/Logo";
 import 'flowbite'; // Import Flowbite CSS (if it's not included in your CSS bundle)
 import 'flowbite/dist/flowbite.js'; // Import Flowbite JavaScript
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownProfile from "./DropdownProfile";
-import userImage from "../assets/auth/userimage.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { getImage } from "@/store/features/order/orderAction";
+import parseJwt from "@/fUtils/parseJwt";
 
 
 
 function Navbar() {
     const [menuOpen, setOpen] = useState(false);
     const [profileDropDown, setProfileDropDown] = useState(false);
+    const { userInfo } = useSelector(state => state.auth)
+    const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
+    const { profileImage } = useSelector(state => state.order)
+    const dispatch = useDispatch()
 
-    const toggleMenu = () => {
-        setOpen(prev => !prev)
-    }
+
+    useEffect(() => {
+        dispatch(getImage(decoded.profileImage))
+    }, [])
 
     const toggleProfileDropDown = () => {
         setProfileDropDown(prev => !prev)
@@ -38,7 +45,7 @@ function Navbar() {
                             </div>
                             <div className="flex w-2/6">
                                 <div className="m-auto">
-                                    <img onClick={toggleProfileDropDown} className="w-10 h-10 rounded-full cursor-pointer" src={userImage} alt="profile image" />
+                                    <img onClick={toggleProfileDropDown} className="w-10 h-10 rounded-full cursor-pointer" src={profileImage} alt="profile image" />
                                 </div>
                             </div>
                         </div>

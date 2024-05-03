@@ -6,11 +6,12 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import parseJwt from "../fUtils/parseJwt.js"
-
+import { getImage } from "@/store/features/order/orderAction";
 
 
 const DropdownProfile = ({ profileDropDown }) => {
     const { userInfo } = useSelector(state => state.auth)
+    const { profileImage } = useSelector(state => state.order)
     const [ decoded, setDecoded ] = useState(parseJwt(userInfo))
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -25,12 +26,16 @@ const DropdownProfile = ({ profileDropDown }) => {
         }
     }, [userInfo])
 
+    useEffect(() => {
+        dispatch(getImage(decoded.profileImage))
+    }, [])
+
     return (
         <div tabIndex="0" className={`dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box w-80 absolute bg-slate-100 ${profileDropDown ? "": "hidden"}`}>
             <div className="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral">
                 <div className="flex space-x-4 items-center p-4">
                     <div className="flex mr-auto items-center space-x-4">
-                        <img src={userImage} alt="Name" className="w-12 h-12 shrink-0 rounded-full" />
+                        <img src={profileImage} alt="Name" className="w-12 h-12 shrink-0 rounded-full" />
                         <div className="space-y-2 flex flex-col flex-1 truncate">
                             <div className="relative leading-tight text-gray-900">
                                 <span className="flex">
